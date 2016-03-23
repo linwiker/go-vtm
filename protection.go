@@ -2,11 +2,11 @@ package stingray
 
 import (
     "net/http"
-	"encoding/json"
+    "encoding/json"
 )
 
 type Protection struct {
-	jsonResource   `json:"-"`
+    jsonResource   `json:"-"`
     ProtectionProperties `json:"properties"`
 }
 
