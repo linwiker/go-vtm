@@ -82,7 +82,7 @@ Support for resources is being added as needed.
 - [x] Monitor Program
 - [ ] NAT Configuration
 - [x] Pool
-- [ ] Protection Class
+- [x] Protection Class
 - [x] Rate Shaping Class
 - [x] Rule
 - [x] SLM Class
