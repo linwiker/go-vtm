@@ -92,6 +92,8 @@ func (c *Client) Do(req *http.Request) (*http.Response, error) {
 		return resp, err
 	}
 
+	defer resp.Body.Close()
+
 	return resp, nil
 }
 
@@ -162,6 +164,7 @@ func (c *Client) List(r Resourcer) ([]string, *http.Response, error) {
 	}
 
 	body, err := ioutil.ReadAll(resp.Body)
+	defer resp.Body.Close()
 	if err != nil {
 		return nil, resp, err
 	}
