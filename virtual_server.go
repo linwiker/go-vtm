@@ -224,6 +224,12 @@ func (r *VirtualServer) String() string {
 	return string(s)
 }
 
+//Bytes will return back just the bytes
+func (r *VirtualServer) Bytes() []byte {
+	b, _ := jsonMarshal(r)
+	return b
+}
+
 func (r *VirtualServer) decode(data []byte) error {
 	return json.Unmarshal(data, &r)
 }

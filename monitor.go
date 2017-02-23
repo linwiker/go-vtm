@@ -68,9 +68,16 @@ func (r *Monitor) endpoint() string {
 	return "monitors"
 }
 
+//String will return back the json as a string
 func (r *Monitor) String() string {
-	s, _ := jsonMarshal(r)
-	return string(s)
+	b := r.Bytes()
+	return string(b)
+}
+
+//Bytes will return back just the bytes
+func (r *Monitor) Bytes() []byte {
+	b, _ := jsonMarshal(r)
+	return b
 }
 
 func (r *Monitor) decode(data []byte) error {

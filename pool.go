@@ -125,9 +125,16 @@ func (r *Pool) endpoint() string {
 	return "pools"
 }
 
+//String will return back the json as a string
 func (r *Pool) String() string {
-	s, _ := jsonMarshal(r)
-	return string(s)
+	b := r.Bytes()
+	return string(b)
+}
+
+//Bytes will return back just the bytes
+func (r *Pool) Bytes() []byte {
+	b, _ := jsonMarshal(r)
+	return b
 }
 
 func (r *Pool) decode(data []byte) error {

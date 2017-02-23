@@ -7,6 +7,11 @@ type fileResource struct {
 	Note    string
 }
 
+//Bytes will return back the content as a array of bytes
+func (f *fileResource) Bytes() []byte {
+	return f.Content
+}
+
 func (f *fileResource) String() string {
 	return string(f.Content)
 }

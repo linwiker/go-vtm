@@ -24,6 +24,12 @@ func (r *ServiceLevelMonitor) endpoint() string {
 	return "service_level_monitors"
 }
 
+//Bytes will return back just the bytes
+func (r *ServiceLevelMonitor) Bytes() []byte {
+	b, _ := jsonMarshal(r)
+	return b
+}
+
 func (r *ServiceLevelMonitor) String() string {
 	s, _ := jsonMarshal(r)
 	return string(s)

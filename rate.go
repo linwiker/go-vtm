@@ -23,11 +23,17 @@ func (r *Rate) endpoint() string {
 	return "rate"
 }
 
+//String will return back the json as a string
 func (r *Rate) String() string {
-	s, _ := jsonMarshal(r)
-	return string(s)
+	b := r.Bytes()
+	return string(b)
 }
 
+//Bytes will return back just the bytes
+func (r *Rate) Bytes() []byte {
+	b, _ := jsonMarshal(r)
+	return b
+}
 func (r *Rate) decode(data []byte) error {
 	return json.Unmarshal(data, &r)
 }

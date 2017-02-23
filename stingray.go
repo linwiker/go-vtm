@@ -4,10 +4,10 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"net/http"
 	"net/url"
-	"strings"
 )
 
 const (
@@ -53,7 +53,14 @@ func NewClient(httpClient *http.Client, urlStr, username string, password string
 }
 
 // NewRequest creates a new request with the params
-func (c *Client) NewRequest(method, urlStr string, body string) (*http.Request, error) {
+func (c *Client) NewRequest(method, urlStr string, body *[]byte) (*http.Request, error) {
+
+	var bodyreader io.Reader
+
+	if body != nil {
+		bodyreader = bytes.NewReader(*body)
+	}
+
 	rel, err := url.Parse(c.BaseURL.Path + urlStr)
 	if err != nil {
 		return nil, err
@@ -61,13 +68,13 @@ func (c *Client) NewRequest(method, urlStr string, body string) (*http.Request, 
 
 	u := c.BaseURL.ResolveReference(rel)
 
-	buf := strings.NewReader(body)
-	req, err := http.NewRequest(method, u.String(), buf)
+	req, err := http.NewRequest(method, u.String(), bodyreader)
 	if err != nil {
 		return nil, err
 	}
 
 	req.SetBasicAuth(c.Username, c.Password)
+
 	return req, nil
 }
 
@@ -92,7 +99,7 @@ func (c *Client) Do(req *http.Request) (*http.Response, error) {
 func (c *Client) Get(r Resourcer) (*http.Response, error) {
 	u := fmt.Sprintf("%v/%v", r.endpoint(), r.Name())
 
-	req, err := c.NewRequest("GET", u, "")
+	req, err := c.NewRequest("GET", u, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -103,6 +110,7 @@ func (c *Client) Get(r Resourcer) (*http.Response, error) {
 	}
 
 	body, err := ioutil.ReadAll(resp.Body)
+	defer resp.Body.Close()
 	if err != nil {
 		return resp, err
 	}
@@ -116,22 +124,22 @@ func (c *Client) Get(r Resourcer) (*http.Response, error) {
 func (c *Client) Set(r Resourcer) (*http.Response, error) {
 	u := fmt.Sprintf("%v/%v", r.endpoint(), r.Name())
 
-	req, err := c.NewRequest("PUT", u, r.String())
+	data := r.Bytes()
+	req, err := c.NewRequest("PUT", u, &data)
+
 	req.Header.Add("Content-Type", r.contentType())
 	if err != nil {
 		return nil, err
 	}
 
-	resp, err := c.Do(req)
-
-	return resp, err
+	return c.Do(req)
 }
 
 // Delete deletes a resource
 func (c *Client) Delete(r Resourcer) (*http.Response, error) {
 	u := fmt.Sprintf("%v/%v", r.endpoint(), r.Name())
 
-	req, err := c.NewRequest("DELETE", u, "")
+	req, err := c.NewRequest("DELETE", u, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -143,7 +151,7 @@ func (c *Client) Delete(r Resourcer) (*http.Response, error) {
 
 // List lists resources of the specified type
 func (c *Client) List(r Resourcer) ([]string, *http.Response, error) {
-	req, err := c.NewRequest("GET", r.endpoint(), "")
+	req, err := c.NewRequest("GET", r.endpoint(), nil)
 	if err != nil {
 		return nil, nil, err
 	}

@@ -48,6 +48,12 @@ func (r *TrafficIPGroup) String() string {
 	return string(s)
 }
 
+//Bytes will return back just the bytes
+func (r *TrafficIPGroup) Bytes() []byte {
+	b, _ := jsonMarshal(r)
+	return b
+}
+
 func (r *TrafficIPGroup) decode(data []byte) error {
 	return json.Unmarshal(data, &r)
 }

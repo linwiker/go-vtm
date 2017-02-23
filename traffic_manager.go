@@ -22,6 +22,12 @@ func (r *TrafficManager) String() string {
 	return string(s)
 }
 
+//Bytes will return back just the bytes
+func (r *TrafficManager) Bytes() []byte {
+	b, _ := jsonMarshal(r)
+	return b
+}
+
 func (r *TrafficManager) decode(data []byte) error {
 	return json.Unmarshal(data, &r)
 }

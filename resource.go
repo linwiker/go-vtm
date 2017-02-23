@@ -8,7 +8,7 @@ type Resourcer interface {
 	endpoint() string
 	contentType() string
 	decode([]byte) error
-	String() string
+	Bytes() []byte
 }
 
 type resource struct {

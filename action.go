@@ -60,9 +60,16 @@ func (r *Action) endpoint() string {
 	return "actions"
 }
 
+//String will return back the json as a string
 func (r *Action) String() string {
-	s, _ := jsonMarshal(r)
-	return string(s)
+	b := r.Bytes()
+	return string(b)
+}
+
+//Bytes will return back just the bytes
+func (r *Action) Bytes() []byte {
+	b, _ := jsonMarshal(r)
+	return b
 }
 
 func (r *Action) decode(data []byte) error {
