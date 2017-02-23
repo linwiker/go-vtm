@@ -92,8 +92,6 @@ func (c *Client) Do(req *http.Request) (*http.Response, error) {
 		return resp, err
 	}
 
-	defer resp.Body.Close()
-
 	return resp, nil
 }
 
