@@ -155,6 +155,7 @@ type VirtualServerProperties struct {
 		RequestClientCert      *string                     `json:"request_client_cert,omitempty"`
 		SendCloseAlerts        *bool                       `json:"send_close_alerts,omitempty"`
 		ServerCertDefault      *string                     `json:"server_cert_default,omitempty"`
+                ServerCertAltCertificates   *[]string              `json:"server_cert_alt_certificates,omitempty"`
 		ServerCertHostMapping  *ServerCertHostMappingTable `json:"server_cert_host_mapping,omitempty"`
 		SignatureAlgorithms    *string                     `json:"signature_algorithms,omitempty"`
 		SSLCiphers             *string                     `json:"ssl_ciphers,omitempty"`
