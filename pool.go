@@ -37,21 +37,21 @@ type PoolProperties struct {
 		SubnetIDs        *[]string `json:"subnetids,omitempty"`
 	} `json:"auto_scaling"`
 	Basic struct {
-		BandwidthClass                *string   `json:"bandwidth_class,omitempty"`
-		FailurePool                   *string   `json:"failure_pool,omitempty"`
-		MaxConnectionAttempts         *int      `json:"max_connection_attempts,omitempty"`
-		MaxIdleConnectionsPerNode     *int      `json:"max_idle_connections_pernode,omitempty"`
-		MaxTimedOutConnectionAttempts *int      `json:"max_timed_out_connection_attempts,omitempty"`
-		Monitors                      *[]string `json:"monitors,omitempty"`
-		NodeCloseWithRST              *bool     `json:"node_close_with_rst,omitempty"`
-		NodeConnectionAttempts        *int      `json:"node_connection_attempts,omitempty"`
-		NodeDeleteBehavior            *string   `json:"node_delete_behavior,omitempty"`
-		NodeDrainToDeleteTimeout      *int      `json:"node_drain_to_delete_timeout,omitempty"`
-		NodesTable                    []Node    `json:"nodes_table"`
-		PassiveMonitoring             *bool     `json:"passive_monitoring,omitempty"`
-		PersistenceClass              *string   `json:"persistence_class,omitempty"`
-		Note                          *string   `json:"note,omitempty"`
-		Transparent                   *bool     `json:"transparent,omitempty"`
+		BandwidthClass                *string     `json:"bandwidth_class,omitempty"`
+		FailurePool                   *string     `json:"failure_pool,omitempty"`
+		MaxConnectionAttempts         *int        `json:"max_connection_attempts,omitempty"`
+		MaxIdleConnectionsPerNode     *int        `json:"max_idle_connections_pernode,omitempty"`
+		MaxTimedOutConnectionAttempts *int        `json:"max_timed_out_connection_attempts,omitempty"`
+		Monitors                      *[]string   `json:"monitors,omitempty"`
+		NodeCloseWithRST              *bool       `json:"node_close_with_rst,omitempty"`
+		NodeConnectionAttempts        *int        `json:"node_connection_attempts,omitempty"`
+		NodeDeleteBehavior            *string     `json:"node_delete_behavior,omitempty"`
+		NodeDrainToDeleteTimeout      *int        `json:"node_drain_to_delete_timeout,omitempty"`
+		NodesTable                    *NodesTable `json:"nodes_table,omitempty"`
+		PassiveMonitoring             *bool       `json:"passive_monitoring,omitempty"`
+		PersistenceClass              *string     `json:"persistence_class,omitempty"`
+		Note                          *string     `json:"note,omitempty"`
+		Transparent                   *bool       `json:"transparent,omitempty"`
 	} `json:"basic"`
 	Connection struct {
 		MaxConnectTime        *int `json:"max_connect_time,omitempty"`
@@ -113,6 +113,8 @@ type PoolProperties struct {
 		AcceptFromMask *string `json:"accept_from_mask,omitempty"`
 	} `json:"udp"`
 }
+
+type NodesTable []Node
 
 type Node struct {
 	Node     *string `json:"node,omitempty"`
