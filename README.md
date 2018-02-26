@@ -1,19 +1,17 @@
-# go-stingray
+# go-vtm
 
-[![GoDoc](https://godoc.org/github.com/whitepages/go-stingray?status.svg)](https://godoc.org/github.com/whitepages/go-stingray)
-[![Build Status](https://secure.travis-ci.org/whitepages/go-stingray.png)](http://travis-ci.org/whitepages/go-stingray)
+[![GoDoc](https://godoc.org/github.com/atlassian/go-stingray?status.svg)](https://godoc.org/github.com/whitepages/go-stingray)
 
-go-stingray is a client library for accessing the Stingray Traffic
-Manager REST API.
+go-vtm is a client library for accessing the Brocade Virtual Traffic Manager 
+(formerly Riverbed Stingray, and Zeus ZXTM) REST API.
 
-For documentation of the Stingray API, see the "Stingray Traffic
-Manager REST API Guide" version 2.6, March 2014 from the
-[Riverbed support site](https://support.riverbed.com/content/support/software/steelapp/traffic-manager.html).
+For documentation of the vTM API, see the "Brocade Virtual Traffic Manager: REST API Guide" version 17.2, May 2017 from the
+[Brocade support site](http://community.brocade.com/t5/vADC-Docs/Brocade-Virtual-Application-Delivery-Controller-vADC-Product/ta-p/73714).
 
 ## Usage
 
 ```go
-import "github.com/whitepages/go-stingray"
+import "github.com/atlassian/go-vtm"
 ```
 
 Create a new Stingray client.
