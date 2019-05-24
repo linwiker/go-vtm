@@ -1,3 +1,7 @@
+##
+
+* Switch to v4.0 of the REST API
+
 ## 1.2.1
 
 * Remove dns section from pool
