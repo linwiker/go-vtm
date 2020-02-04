@@ -11,7 +11,7 @@ For documentation of the vTM API, see the "Brocade Virtual Traffic Manager: REST
 ## Usage
 
 ```go
-import "github.com/atlassian/go-vtm"
+import "github.com/linwiker/go-vtm"
 ```
 
 Create a new Stingray client.
