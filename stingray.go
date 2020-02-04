@@ -2,16 +2,18 @@ package stingray
 
 import (
 	"bytes"
+	"crypto/tls"
 	"encoding/json"
 	"fmt"
 	"io"
 	"io/ioutil"
 	"net/http"
 	"net/url"
+	"time"
 )
 
 const (
-	basePath = "/api/tm/4.0/config/active/"
+	basePath = "/api/tm/5.0/config/active/"
 )
 
 // A Client manages communication with the Stingray API.
@@ -32,8 +34,13 @@ type Client struct {
 // NewClient returns a new Stingray API client, using the supplied
 // URL, username, and password
 func NewClient(httpClient *http.Client, urlStr, username string, password string) *Client {
+	tr := &http.Transport{
+		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+	}
 	if httpClient == nil {
 		httpClient = http.DefaultClient
+		httpClient.Transport = tr
+		httpClient.Timeout = 5 * time.Second
 	}
 
 	u, _ := url.Parse(urlStr)
